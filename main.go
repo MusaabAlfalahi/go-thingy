@@ -1,15 +1,24 @@
 package main
 
 import (
-	"net/http"
-	
+	"github.com/MusaabAlfalahi/go-thingy/models"
+	"github.com/MusaabAlfalahi/go-thingy/routes"
+	"github.com/labstack/echo/middleware"
 	"github.com/labstack/echo/v4"
 )
 
 func main() {
 	e := echo.New()
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
-	e.Logger.Fatal(e.Start(":1323"))
+	
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+
+	db := models.InitDB("books.db")
+	models.MigrateDB(db)
+
+	api := e.Group("/api")
+	routes.SetUpRoutes(api)
+
+	
+	e.Logger.Fatal(e.Start(":8080"))
 }

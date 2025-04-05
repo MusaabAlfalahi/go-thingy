@@ -76,11 +76,6 @@ func (b *BookHandler) UpdateBook(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
 
-	if err := validateBook(book); err != nil {
-		log.Error(err.Error())
-		return c.JSON(http.StatusBadRequest, err.Error())
-	}
-
 	updatedBook, err := b.Repo.UpdateBook(id, book)
 	if err != nil {
 		log.Error("Failed to update book: ", err.Error())

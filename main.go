@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/MusaabAlfalahi/go-thingy/models"
 	"github.com/MusaabAlfalahi/go-thingy/routes"
-	"github.com/labstack/echo/middleware"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/echo/v4"
 )
 
